@@ -1,0 +1,103 @@
+body {
+    background-color: #e4e7f8;
+}
+
+.container-fluid {
+    width: 80%;
+    margin-left: 18%;
+}
+
+.container {
+    background-color: rgba(191, 191, 192, 0.174);
+    height: 80vh;
+}
+
+.card-bg-icon {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    font-size: 80px;
+    opacity: 0.12;
+    pointer-events: none;
+}
+
+.card {
+    border-radius: 18px !important;
+    transition: all 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+h5, h4 {
+    letter-spacing: 0.3px;
+}
+
+.calendar {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      width: 4-0px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .calendar header {
+      background: #4f46e5;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .calendar header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      background: #e0e7ff;
+      font-weight: 600;
+    }
+
+    .days div, .dates div {
+      padding: 10px;
+    }
+
+    .dates {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+
+    .dates div {
+      padding: 15px 0;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .dates div:hover {
+      background: #c7d2fe;
+      border-radius: 8px;
+    }
+
+    .today {
+      background: #4f46e5;
+      color: #fff;
+      border-radius: 8px;
+    }
+
+        .circle-icon {
+      width: 60px;
+      height: 60px;
+      background-color: rgba(0, 200, 83, 0.15); /* hijau muda transparan */
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .circle-icon i {
+      color: #28a745; /* hijau ikon */
+      font-size: 28px;
+    }
