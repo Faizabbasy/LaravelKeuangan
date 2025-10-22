@@ -91,12 +91,17 @@
         <div class="sidebar" id="sidebar">
             <h4 class="text-center fw-bold mb-4"><i class="fa fa-line-chart text-success"></i> TabunganKu</h4>
             @if (Auth::check() && Auth::user()->role == 'admin')
-                <a class="nav-link" href="{{ route('home') }}"><i class="fa-solid fa-house"></i>
-                    <span class="ms-1 fw-semibold">Home</span></a>
-                <a class="nav-link" href="#"><i class="fa-solid fa-film"></i>
-                    <span class="ms-1 fw-semibold">Cinemas</span></a>
-                <a class="nav-link" href="#"><i class="fa-solid fa-ticket"></i>
-                    <span class="ms-1 fw-semibold">Ticket</span></a>
+                <li class="nav-item dropdown" style="margin-right: 200px">
+                    <a data-mdb-dropdown-init class="nav-link dropdown-toggle fw-semibold" href="#"
+                        id="navbarDropdownMenuLink" role="button" aria-expanded="false">
+                        Data Master
+                    </a>
+                    <ul class="dropdown-menu text-bold" aria-labelledby="navbarDropdownMenuLink">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('admin.nasabah.index')}}">Data Nasabah</a>
+                        </li>
+                    </ul>
+                </li>
             @elseif (Auth::check() && Auth::user()->role == 'user')
                 <a href=""><i class="fa-solid fa-house"></i> Beranda</a>
                 <a href="{{ route('user.targets.create') }}"><i class="fa-solid fa-plus"></i> Input Target Baru</a>
@@ -139,6 +144,23 @@
         @yield('navbar')
     </div>
 
+
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/9.1.0/mdb.umd.min.js"></script>
+    {{-- CDN JS datatables --}}
+    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
+    {{-- AOS --}}
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
+
+    {{-- dinamis yg isinya javascript --}}
+    {{-- style untuk css --}}
+    @stack('script')
     <script>
         const menuBtn = document.getElementById('menu-btn');
         const sidebar = document.getElementById('sidebar');

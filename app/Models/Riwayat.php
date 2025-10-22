@@ -9,7 +9,7 @@ class Riwayat extends Model
 {
     use softDeletes;
 
-    protected $fillable = ['target_id', 'stor', 'Target_Uang', 'Tanggal'];
+    protected $fillable = ['target_id', 'Target','stor', 'Target_Uang', 'Tanggal'];
 
     public function target() {
         return $this->belongsTo(Target::class);

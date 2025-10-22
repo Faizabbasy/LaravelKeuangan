@@ -1,0 +1,25 @@
+.table {
+            border-radius: 10px;
+            overflow: hidden;
+            vertical-align: middle !important;
+        }
+
+        .table th {
+            background-color: #3265dc !important;
+            color: white;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f6fdf9;
+            transition: 0.3s;
+        }
+
+        td, th {
+            vertical-align: middle !important;
+            text-align: center !important;
+        }
+
+        img {
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+        }

@@ -23,12 +23,8 @@ class RiwayatController extends Controller
      */
     public function create($id)
     {
-        $targets = Target::all();
-        $data = Target::where('id',$id)->first();
-        $target = $data->Target;
-        $targetUang = $data->Target_Uang;
-        $riwayats = Riwayat::with('target')->get();
-        return view('user.riwayat.create', compact('targets','riwayats','id','target','targetUang'));
+        $target = Target::find($id);
+        return view('user.riwayat.create', compact('target'));
     }
 
     /**
@@ -36,7 +32,34 @@ class RiwayatController extends Controller
      */
     public function store(Request $request)
 {
+    $request->validate([
+            'target_id' => 'required',
+            'stor' => 'required|integer|min:1',
+            'tanggal' => 'required',
+            'Target_Uang' => 'required|integer|min:1',
+            // 'Perbulan' => 'required',
+        ], [
+            'target_id.required' => 'Target harus diisi',
+            'stor.required' => 'stor harus diisi!!',
+            'tanggal.required' => 'Target bulan harus diisi',
+            'Target_Uang.required' => 'Target uang harus diisi',
+            // 'Perbulan.required' => 'Perbulan harus diisi',
+        ]);
+        $perBulan =
 
+        $createData = Riwayat::create([
+            'target_id' => $request->target_id,
+            'stor' => $request->stor,
+            'Tanggal' => $request->tanggal,
+            'Target_Uang' => $request->Target_Uang,
+            // 'Perbulan' => $perBulan,
+        ]);
+
+        if ($createData) {
+            return redirect()->route('user.dashboard')->with('success', 'Berhasil menambah data');
+        } else {
+            return back()->with('failed', 'Silahkan coba lagi');
+        }
 }
 
 

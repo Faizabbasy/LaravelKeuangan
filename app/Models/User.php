@@ -30,6 +30,10 @@ class User extends Authenticatable
         return $this->belongsTo(Target::class);
     }
 
+    public function nasabah()
+    {
+        return $this->hasOne(Nasabah::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

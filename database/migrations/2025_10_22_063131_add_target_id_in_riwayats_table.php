@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('riwayats', function (Blueprint $table) {
-            $table->id();
-            $table->integer('stor');
-            $table->integer('Target_Uang');
-            $table->datetime('Tanggal')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('riwayats', function (Blueprint $table) {
+            $table->foreignId('target_id')->constrained('targets')->add();
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('riwayats');
+        Schema::table('riwayats', function (Blueprint $table) {
+            //
+        });
     }
 };

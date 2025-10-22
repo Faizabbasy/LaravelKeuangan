@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('riwayats', function (Blueprint $table) {
+        Schema::create('nasabahs', function (Blueprint $table) {
             $table->id();
-            $table->integer('stor');
-            $table->integer('Target_Uang');
-            $table->datetime('Tanggal')->nullable();
+            $table->foreignID('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('riwayats');
+        Schema::dropIfExists('nasabahs');
     }
 };

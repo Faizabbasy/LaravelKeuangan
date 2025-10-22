@@ -28,28 +28,28 @@
             <tbody></tbody>
 
 
-            @foreach ($riwayats as $key => $item)
+            @foreach ($riwayats as $key => $target)
                 <tr>
                     <td>{{ $key + 1 }}</td>
-                    <td>{{ $item['target'] }}</td>
-                    <td>{{ $item['stor'] }}</td>
+                    <td>{{ $target->Target }}</td>
+                    <td>{{ $target->stor }}</td>
+                    <td>{{ $target->Berapa_Bulan }} bulan</td>
+                    <td>Rp . {{ number_format($target->Target_Uang, 0, ',', '.') }}</td>
+                    <td>Rp . {{ number_format($target->Perbulan, 0, ',', '.') }}</td>
                     <td>
-                            Rp. {{ number_format($item->targetUang, 0, ',', '.') }}
+                        <a href="{{ route('user.riwayats.create', $target->id) }}" class="btn btn-success"
+                            style="border-radius: 20px;">
+                            <i class="fa-solid fa-plus text-white"></i>
+                        </a>
+                        <a href="{{ route('user.targets.edit', $target->id) }}" class="btn btn-sm btn-primary mt-1"
+                            style="border-radius: 20px; width: 58px;"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <form action="{{ route('user.targets.delete', $target->id) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger mt-1"
+                                style="border-radius: 20px; width: 58px;"><i class="fa-solid fa-trash"></i></button>
+                        </form>
                     </td>
-                    <td>{{ $item['Tanggal']}}</td>
-                    <td>
-                        <div class="d-flex justify-content-center">
-                            <a href="" class="btn btn-primary">Edit</a>
-
-                            <form action="" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger ms-2">Hapus</button>
-                            </form>
-                        </div>
-                    </td>
-                    </td>
-
                 </tr>
             @endforeach
         </table>

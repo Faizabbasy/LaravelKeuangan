@@ -67,7 +67,8 @@
                 <div class="card bg-white shadow-sm border-0" style="height: 80vh;">
                     <div class="card-header bg-white d-flex justify-content-between align-items-center border-0">
                         <h5 class="mb-0 text-secondary fw-semibold">Daftar Target Tabungan</h5>
-                        <a href="#" class="btn btn-secondary btn-sm">Data Sampah</a>
+                        <a href="{{ route('user.targets.export')}}" class="btn btn-secondary me-2">Export (.xlsx)</a>
+                        <a href="{{ route('user.targets.trash') }}" class="btn btn-secondary btn-sm">Data Sampah</a>
                     </div>
 
                     <div class="card-body p-3" style="overflow-y: auto; max-height: calc(80vh - 70px);">
@@ -94,13 +95,13 @@
                                             <a href="{{ route('user.riwayats.create', $target->id)}}" class="btn btn-success" style="border-radius: 20px;">
                                                 <i class="fa-solid fa-plus text-white"></i>
                                             </a>
-                                            <a href="#" class="btn btn-sm btn-primary mt-1"
-                                                style="border-radius: 20px;">Edit</a>
-                                            <form action="#" method="POST" class="d-inline">
+                                            <a href="{{ route('user.targets.edit', $target->id) }}" class="btn btn-sm btn-primary mt-1"
+                                                style="border-radius: 20px; width: 58px;"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <form action="{{ route('user.targets.delete', $target->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger mt-1"
-                                                    style="border-radius: 20px;">Hapus</button>
+                                                    style="border-radius: 20px; width: 58px;"><i class="fa-solid fa-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -252,21 +253,21 @@
 
     renderCalendar();
 
-    const bulan = document.getElementById('Berapa_Bulan');
-    const targetUang = document.getElementById('Target_Uang');
-    const perBulan = document.getElementById('Perbulan');
+    // const bulan = document.getElementById('Berapa_Bulan');
+    // const targetUang = document.getElementById('Target_Uang');
+    // const perBulan = document.getElementById('Perbulan');
 
-    function hitungPerBulan() {
-        const b = parseFloat(bulan.value) || 0;
-        const t = parseFloat(targetUang.value) || 0;
-        if (b > 0 && t > 0) {
-            perBulan.value = Math.ceil(t / b);
-        } else {
-            perBulan.value = '';
-        }
-    }
+    // function hitungPerBulan() {
+    //     const b = parseFloat(bulan.value) || 0;
+    //     const t = parseFloat(targetUang.value) || 0;
+    //     if (b > 0 && t > 0) {
+    //         perBulan.value = Math.ceil(t / b);
+    //     } else {
+    //         perBulan.value = '';
+    //     }
+    // }
 
-    bulan.addEventListener('input', hitungPerBulan);
-    targetUang.addEventListener('input', hitungPerBulan);
+    // bulan.addEventListener('input', hitungPerBulan);
+    // targetUang.addEventListener('input', hitungPerBulan);
 </script>
 

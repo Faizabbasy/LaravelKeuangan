@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Nasabah;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -69,6 +70,13 @@ class UserController extends Controller
             'role' => 'user'
         ]);
 
+        Nasabah::create([
+            'name' => $createUser->name,
+            'email' => $createUser->email,
+            'password' => $createUser->password,
+            'user_id' => $createUser->id,
+        ]);
+
         // menentukan perpindahan halaman
         if ($createUser) {
             //  redirect() : memindahkan halaman, route() : memanggil name route, with () : mengirimkan session data, biasanya untuk notifikasi
@@ -96,6 +104,7 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => $request->password,
                 'role' => 'admin'
+
 
             ]);
             if ($createData) {
