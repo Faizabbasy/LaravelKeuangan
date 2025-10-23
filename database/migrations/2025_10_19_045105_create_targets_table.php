@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('Target');
             $table->string('Berapa_Bulan');
             $table->integer('Target_Uang');
-            $table->integer('Perbulan');
+            $table->integer('Perbulan')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

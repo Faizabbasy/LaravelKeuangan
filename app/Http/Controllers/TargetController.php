@@ -47,7 +47,6 @@ class TargetController extends Controller
             // 'Perbulan.required' => 'Perbulan harus diisi',
         ]);
 
-        $perBulan= 
 
         $createData = Target::create([
             'Target' => $request->Target,
