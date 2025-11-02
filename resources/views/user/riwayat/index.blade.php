@@ -1,81 +1,57 @@
 @extends('templates.app')
 
 @section('navbar')
-    <div class="container mt-5 w-75" style="margin-left: 20%">
-        {{-- @if (Session::get('login'))
-            <div class="alert alert-success">{{ Session::get('login') }},
-                <b>Selamat Datang {{ Auth::user()->name }}</b>
-            </div>
-        @endif --}}
-        <h4>Riwayat</h4>
+<div class="containerr mt-5">
 
-        <div class="d-flex justify-content-end">
-            <a href="" class="btn btn-secondary me-2">Export (.xlsx)</a>
-            <a href="" class="btn btn-secondary me-2">Data Sampah</a>
+    <div class="card  p-4" style="margin-left: 18%">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="mb-0">Riwayat</h4>
+            <div>
+                <a href="" class="btn btn-outline-secondary me-2">
+                    <i class="fa-solid fa-file-export me-1"></i> Export (.xlsx)
+                </a>
+                <a href="" class="btn btn-outline-secondary">
+                    <i class="fa-solid fa-trash-can me-1"></i> Data Sampah
+                </a>
+            </div>
         </div>
 
-        <table class="table table-responsive table-bordered mt-3" style="border-radius: 10px">
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>Target</th>
-                    <th>Stor</th>
-                    <th>Target Uang</th>
-                    <th>Tanggal</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle text-center">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 5%;">No.</th>
+                        <th style="width: 25%;">Target</th>
+                        <th style="width: 15%;">Stor</th>
+                        <th style="width: 15%;">Tanggal</th>
+                        <th style="width: 20%;">Target Uang</th>
+                        <th style="width: 15%;">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($riwayats as $key => $target)
+                        <tr>
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $target->Target }}</td>
+                            <td>Rp {{ number_format($target->stor, 0, ',', '.') }}</td>
+                            <td>{{ $target->Berapa_Bulan }} bulan</td>
+                            <td>Rp {{ number_format($target->Target_Uang, 0, ',', '.') }}</td>
+                            <td>
+                                <form action="{{ route('user.targets.delete', $target->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger"
+                                        style="border-radius: 10px;">
+                                        <i class="fa-solid fa-trash"></i> Hapus
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-
-            @foreach ($riwayats as $key => $target)
-                <tr>
-                    <td>{{ $key + 1 }}</td>
-                    <td>{{ $target->Target }}</td>
-                    <td>{{ $target->stor }}</td>
-                    <td>{{ $target->Berapa_Bulan }} bulan</td>
-                    <td>Rp . {{ number_format($target->Target_Uang, 0, ',', '.') }}</td>
-                    <td>Rp . {{ number_format($target->Perbulan, 0, ',', '.') }}</td>
-                    <td>
-                        <a href="{{ route('user.riwayats.create', $target->id) }}" class="btn btn-success"
-                            style="border-radius: 20px;">
-                            <i class="fa-solid fa-plus text-white"></i>
-                        </a>
-                        <a href="{{ route('user.targets.edit', $target->id) }}" class="btn btn-sm btn-primary mt-1"
-                            style="border-radius: 20px; width: 58px;"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <form action="{{ route('user.targets.delete', $target->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger mt-1"
-                                style="border-radius: 20px; width: 58px;"><i class="fa-solid fa-trash"></i></button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </table>
-    @endsection
-
-    {{-- @section('Footer')
-    @endsection
-
-    @push('script')
-        <script>
-            $(function() {
-                $('#promoTable').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    ajax: "{{ route('staff.promos.datatables') }}",
-
-                    columns:[
-                        { data: 'DT_RowIndex', name: 'RowIndex', orderable: false, searchable: false},
-                        { data: 'promo_code', name: 'promo_code', orderable: true, searchable: true},
-                        { data: 'hasil', name: 'hasil', orderable: true, searchable: true},
-                        { data: 'discount', name: 'discount', visible: false, searchable: true},
-                        { data: 'activedBadge', name: 'activedBadge', orderable: true, searchable: true },
-                        { data: 'buttons', name: 'buttons', orderable: false, searchable: false }
-
-                    ]
-                })
-            })
-        </script>
-    @endpush --}}
+</div>
+@endsection

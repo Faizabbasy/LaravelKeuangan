@@ -15,7 +15,9 @@
                                 <h3 class="d-flex text-center justify-content-center mb-0">
                                     <div class="circle-icon">
                                         <i class="fa-solid fa-dollar-sign"></i>
-                                    </div> <span class="fs-4 mt-3">Rp 12.500.000</span>
+                                    {{-- @foreach ($riwayats as $key => $target)
+                                        <td>Rp {{ number_format($target->stor, 0, ',', '.') }}</td>
+                                    @endforeach --}}
                                 </h3>
                             </div>
                         </div>

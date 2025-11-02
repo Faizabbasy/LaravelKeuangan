@@ -20,7 +20,7 @@
             <div class="alert alert-success p-2 mt-4 rounded shadow-sm text-center">{{ Session::get('success') }}</div>
         @endif
 
-        <div class="card shadow-sm border-0 rounded-3">
+        <d`iv class="card shadow-sm border-0 rounded-3">
             <div class="card-body">
                 <h5 class="card-title mb-3 text-center">Data Pengguna</h5>
                 <table class="table table-hover table-bordered align-middle text-center">
