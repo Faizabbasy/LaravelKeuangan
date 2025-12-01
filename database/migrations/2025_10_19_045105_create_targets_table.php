@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('Target');
             $table->string('Berapa_Bulan');
             $table->integer('Target_Uang');
+            $table->string('foto');
             $table->integer('Perbulan')->nullable();
             $table->timestamps();
             $table->softDeletes();

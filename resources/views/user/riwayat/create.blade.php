@@ -3,11 +3,14 @@
 @section('navbar')
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <div class="w-50 bg-white mt-5 p-5" style="margin-left: 30%;">
+        @if (Session::get('ok'))
+            <div class="alert alert-success">{{ Session::get('ok') }}</div>
+        @endif
         @if (Session::get('error'))
             <div class="alert alert-danger">{{ Session::get('error') }}</div>
         @endif
         <h4 class="text-center fw-bold mb-4"><i class="fa fa-line-chart text-success"></i></h4>
-        <h5 class="text-center mb-3 p-2">Buat Target Tabungan Baru</h5>
+        <h5 class="text-center mb-3 p-2">Stor tabungan</h5>
         <form method="POST" action="{{ route('user.riwayats.store') }}">
             @csrf
             <div class="mb-3">

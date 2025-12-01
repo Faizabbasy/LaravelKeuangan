@@ -24,7 +24,7 @@ class TargetExport implements FromCollection, WithHeadings, WithMapping
 
     public function headings(): array
     {
-        return ['No', 'Target', 'Berapa lama', 'Target Uang'];
+        return ['No', 'Target', 'Berapa lama', 'Target Uang', 'Foto'];
     }
 
     public function map($Target): array
@@ -33,7 +33,8 @@ class TargetExport implements FromCollection, WithHeadings, WithMapping
             ++$this->rowNumber,
             $Target->Target,
             $Target->Berapa_Bulan,
-            $Target->Target_Uang
+            $Target->Target_Uang,
+            $Target->foto,
         ];
     }
 }

@@ -1,22 +1,13 @@
-@extends('templates.app')
+    @extends('templates.app')
 
-@section('navbar')
-<div class="containerr mt-5">
-
-    <div class="card  p-4" style="margin-left: 18%">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="mb-0">Riwayat</h4>
-            <div>
-                <a href="" class="btn btn-outline-secondary me-2">
-                    <i class="fa-solid fa-file-export me-1"></i> Export (.xlsx)
-                </a>
-                <a href="{{ route('user.riwayats.trash') }}" class="btn btn-outline-secondary">
-                    <i class="fa-solid fa-trash-can me-1"></i> Data Sampah
-                </a>
+    @section('navbar')
+        <div class="card-body p-3" style="overflow-y: auto; max-height: calc(80vh - 70px); width: 80%; margin-left: 18%;">
+            <div class="d-flex justify-content-end">
+                <a href="{{ route('user.dashboard') }}" class="btn btn-secondary">Kembali</a>
             </div>
-        </div>
-
-        <div class="table-responsive">
+            @if (Session::get('success'))
+                <div class="alert alert-success">{{ Session::get('success') }}</div>
+            @endif
             <table class="table table-bordered table-hover align-middle text-center">
                 <thead class="table-light">
                     <tr>
@@ -37,11 +28,11 @@
                             <td>{{ $target->Tanggal }}</td>
                             <td>Rp {{ number_format($target->Target_Uang, 0, ',', '.') }}</td>
                             <td>
-                                <form action="{{ route('user.riwayats.delete', $target->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('user.riwayats.delete', $target->id) }}" method="POST"
+                                    class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger"
-                                        style="border-radius: 10px;">
+                                    <button type="submit" class="btn btn-sm btn-danger" style="border-radius: 10px;">
                                         <i class="fa-solid fa-trash"></i> Hapus
                                     </button>
                                 </form>
@@ -51,7 +42,4 @@
                 </tbody>
             </table>
         </div>
-    </div>
-
-</div>
-@endsection
+    @endsection

@@ -48,6 +48,10 @@ Route::middleware('isUser')->prefix('/user')->name('user.')->group(function() {
         Route::get('/', [RiwayatController::class, 'index'])->name('index');
         Route::get('/create/{id}', [RiwayatController::class, 'create'])->name('create');
         Route::post('/store', [RiwayatController::class, 'store'])->name('store');
+        Route::delete('/delete/{id}', [RiwayatController::class, 'destroy'])->name('delete');
+        Route::get('/trash', [RiwayatController::class, 'trash'])->name('trash');
+        Route::patch('/restore/{id}', [RiwayatController::class, 'restore'])->name('restore');
+        Route::delete('/delete-permanent/{id}', [RiwayatController::class, 'deletePermanent'])->name('delete_permanent');
     });
 });
 

@@ -6,6 +6,9 @@ use App\Models\Target;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\TargetExport;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
 
 class TargetController extends Controller
 {
@@ -38,6 +41,7 @@ class TargetController extends Controller
             'Target' => 'required|min:3',
             'Berapa_Bulan' => 'required|integer|min:1',
             'Target_Uang' => 'required|integer|min:1',
+            'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048'
             // 'Perbulan' => 'required',
         ], [
             'Target.required' => 'Target harus diisi',
@@ -47,11 +51,16 @@ class TargetController extends Controller
             // 'Perbulan.required' => 'Perbulan harus diisi',
         ]);
 
+        $foto = $request->file('foto');
+        $file_name = Str::random(5) . "-foto." . $foto->getClientOriginalExtension();
+        Storage::disk('public')->putFileAs('foto_target', $foto, $file_name);
+        $path = $foto->storeAs("foto", $file_name, "public");
 
         $createData = Target::create([
             'Target' => $request->Target,
             'Berapa_Bulan' => $request->Berapa_Bulan,
             'Target_Uang' => $request->Target_Uang,
+            'foto' => $path,
             // 'Perbulan' => $perBulan,
         ]);
 
@@ -91,6 +100,7 @@ class TargetController extends Controller
             'Target' => 'required|min:3',
             'Berapa_Bulan' => 'required|integer|min:1',
             'Target_Uang' => 'required|integer|min:1',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
             // 'Perbulan' => 'required',
         ], [
             'Target.required' => 'Target harus diisi',
@@ -100,10 +110,18 @@ class TargetController extends Controller
             // 'Perbulan.required' => 'Perbulan harus diisi',
         ]);
 
+        $foto = $request->file('foto');
+        $file_name = Str::random(5) . "-foto." . $foto->getClientOriginalExtension();
+        Storage::disk('public')->putFileAs('foto_target', $foto, $file_name);
+        $path = $foto->storeAs("foto", $file_name, "public");
+
+
+
         $updateData = Target::where('id', $id)->update([
             'Target' => $request->Target,
             'Berapa_Bulan' => $request->Berapa_Bulan,
             'Target_Uang' => $request->Target_Uang,
+            'foto' => $path,
             // 'Perbulan' => $perBulan,
         ]);
 
@@ -121,7 +139,7 @@ class TargetController extends Controller
     {
         $deleteData = Target::where('id', $id)->delete();
         if ($deleteData) {
-            return redirect()->route('user.targets.index')->with('success', 'Berhasil menghapus');
+            return redirect()->route('user.dashboard')->with('success', 'Berhasil menghapus');
         } else {
             return redirect()->back()->with('failed', 'Gagal! Silahkan Coba Lagi');
         }
@@ -144,7 +162,7 @@ class TargetController extends Controller
         $targets = Target::onlyTrashed()->find($id);
         // restore() : mengembalikan data ke belum dihapus
         $targets->restore();
-        return redirect()->route('user.targets.index')->with('success', 'Berhasil mengembalikan data!!');
+        return redirect()->route('user.dashboard')->with('success', 'Berhasil mengembalikan data!!');
     }
 
     public function deletePermanent($id)
@@ -154,4 +172,6 @@ class TargetController extends Controller
         $targets->forceDelete();
         return redirect()->back()->with('success', 'Berhasil mengepaus data selamanya!!');
     }
+
+    
 }

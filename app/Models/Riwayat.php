@@ -14,7 +14,7 @@ class Riwayat extends Model
 //     'Target' => 'array',
 // ];
 
-    public function target() {
-        return $this->belongsTo(Target::class);
+    public function Target() {
+        return $this->belongsTo(Target::class, 'target_id');
     }
 }

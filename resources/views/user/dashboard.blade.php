@@ -15,7 +15,7 @@
                                 <h3 class="d-flex text-center justify-content-center mb-0">
                                     <div class="circle-icon">
                                         <i class="fa-solid fa-dollar-sign"></i>
-                                    {{-- @foreach ($riwayats as $key => $target)
+                                        {{-- @foreach ($riwayats as $key => $target)
                                         <td>Rp {{ number_format($target->stor, 0, ',', '.') }}</td>
                                     @endforeach --}}
                                 </h3>
@@ -69,8 +69,16 @@
                 <div class="card bg-white shadow-sm border-0" style="height: 80vh;">
                     <div class="card-header bg-white d-flex justify-content-between align-items-center border-0">
                         <h5 class="mb-0 text-secondary fw-semibold">Daftar Target Tabungan</h5>
-                        <a href="{{ route('user.targets.export')}}" class="btn btn-secondary me-2">Export (.xlsx)</a>
-                        <a href="{{ route('user.targets.trash') }}" class="btn btn-secondary btn-sm">Data Sampah</a>
+                        {{-- <a href="{{ route('user.targets.export') }}" class="btn btn-secondary me-2">Export (.xlsx)</a>
+                        <a href="{{ route('user.targets.trash') }}" class="btn btn-secondary btn-sm">Data Sampah</a> --}}
+                        <div class="d-flex w-50">
+                            <a href="{{ route('user.targets.export') }}" class="btn btn-outline-secondary me-2">
+                                <i class="fa-solid fa-file-export me-1"></i> Export (.xlsx)
+                            </a>
+                            <a href="{{ route('user.targets.trash') }}" class="btn btn-outline-secondary">
+                                <i class="fa-solid fa-trash-can me-1"></i> Data Sampah
+                            </a>
+                        </div>
                     </div>
 
                     <div class="card-body p-3" style="overflow-y: auto; max-height: calc(80vh - 70px);">
@@ -82,6 +90,7 @@
                                     <th>Berapa Lama</th>
                                     <th>Target Uang</th>
                                     <th>Bayar per Bulan</th>
+                                    <th>Lihat Foto Target</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -94,16 +103,27 @@
                                         <td>Rp . {{ number_format($target->Target_Uang, 0, ',', '.') }}</td>
                                         <td>Rp . {{ number_format($target->Perbulan, 0, ',', '.') }}</td>
                                         <td>
-                                            <a href="{{ route('user.riwayats.create', $target->id)}}" class="btn btn-success" style="border-radius: 20px;">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#modalfoto{{ $target->id }}">
+                                                Lihat Foto
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('user.riwayats.create', $target->id) }}"
+                                                class="btn btn-success" style="border-radius: 20px;">
                                                 <i class="fa-solid fa-plus text-white"></i>
                                             </a>
-                                            <a href="{{ route('user.targets.edit', $target->id) }}" class="btn btn-sm btn-primary mt-1"
-                                                style="border-radius: 20px; width: 58px;"><i class="fa-solid fa-pen-to-square"></i></a>
-                                            <form action="{{ route('user.targets.delete', $target->id) }}" method="POST" class="d-inline">
+                                            <a href="{{ route('user.targets.edit', $target->id) }}"
+                                                class="btn btn-sm btn-primary mt-1"
+                                                style="border-radius: 20px; width: 58px;"><i
+                                                    class="fa-solid fa-pen-to-square"></i></a>
+                                            <form action="{{ route('user.targets.delete', $target->id) }}" method="POST"
+                                                class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger mt-1"
-                                                    style="border-radius: 20px; width: 58px;"><i class="fa-solid fa-trash"></i></button>
+                                                    style="border-radius: 20px; width: 58px;"><i
+                                                        class="fa-solid fa-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -193,83 +213,113 @@
                 </div>
             </div> --}}
 
-                <div class="progress progress-circular my-2 mt-3" style="--percentage: 10">
-                    <div class="progress-bar"></div>
-                    <div class="progress-label">10%</div>
-                </div>
-
-                <div class="progress progress-circular my-2 mt-3" style="--percentage: 20">
-                    <div class="progress-bar bg-warning"></div>
-                    <div class="progress-label">20%</div>
-                </div>
-
-                <div class="progress progress-circular my-2 mt-3" style="--percentage: 30">
-                    <div class="progress-bar bg-danger"></div>
-                    <div class="progress-label">20%</div>
-                </div>
-
-                <div class="progress progress-circular my-2 mt-3" style="--percentage: 40">
-                    <div class="progress-bar bg-success"></div>
-                    <div class="progress-label">40%</div>
-                </div>
             </div>
 
         </div>
     </div>
+
+    <!-- Carousel wrapper -->
+    <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel" data-mdb-carousel-init>
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+            <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="2"
+                aria-label="Slide 3"></button>
+        </div>
+
+        <!-- Inner -->
+        <div class="carousel-inner m-3 w-75" style="margin-left: 20% !important;">
+            <!-- Single item -->
+            <div class="carousel-item active">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp" class="d-block w-100"
+                    alt="Sunset Over the City" />
+            </div>
+
+            <!-- Single item -->
+            <div class="carousel-item">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(22).webp" class="d-block w-100"
+                    alt="Canyon at Nigh" />
+            </div>
+
+            <!-- Single item -->
+            <div class="carousel-item">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(23).webp" class="d-block w-100"
+                    alt="Cliff Above a Stormy Sea" />
+            </div>
+        </div>
+        <!-- Inner -->
+
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample"
+            data-mdb-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-mdb-target="#carouselBasicExample"
+            data-mdb-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <!-- Carousel wrapper -->
+
+
+    @foreach ($targets as $key => $target)
+        <div class="modal fade" id="modalfoto{{ $target->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Foto Target</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{{ asset('storage/' . $target->foto) }}" alt="foto"
+                            class="img-fluid border border-danger">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+    <script>
+        const monthYear = document.getElementById("month-year");
+        const datesContainer = document.getElementById("dates");
+
+        const now = new Date();
+        const monthNames = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        const renderCalendar = () => {
+            const year = now.getFullYear();
+            const month = now.getMonth();
+
+            monthYear.textContent = `${monthNames[month]} ${year}`;
+
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+
+            datesContainer.innerHTML = "";
+
+            for (let i = 0; i < firstDay.getDay(); i++) {
+                datesContainer.innerHTML += `<div></div>`;
+            }
+
+            for (let day = 1; day <= lastDay.getDate(); day++) {
+                const todayClass =
+                    day === new Date().getDate() &&
+                    month === new Date().getMonth() &&
+                    year === new Date().getFullYear() ? "today" : "";
+                datesContainer.innerHTML += `<div class="${todayClass}">${day}</div>`;
+            }
+        };
+
+        renderCalendar();
+    </script>
 @endsection
-
-
-<script>
-    const monthYear = document.getElementById("month-year");
-    const datesContainer = document.getElementById("dates");
-
-    const now = new Date();
-    const monthNames = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ];
-
-    const renderCalendar = () => {
-        const year = now.getFullYear();
-        const month = now.getMonth();
-
-        monthYear.textContent = `${monthNames[month]} ${year}`;
-
-        const firstDay = new Date(year, month, 1);
-        const lastDay = new Date(year, month + 1, 0);
-
-        datesContainer.innerHTML = "";
-
-        for (let i = 0; i < firstDay.getDay(); i++) {
-            datesContainer.innerHTML += `<div></div>`;
-        }
-
-        for (let day = 1; day <= lastDay.getDate(); day++) {
-            const todayClass =
-                day === new Date().getDate() &&
-                month === new Date().getMonth() &&
-                year === new Date().getFullYear() ? "today" : "";
-            datesContainer.innerHTML += `<div class="${todayClass}">${day}</div>`;
-        }
-    };
-
-    renderCalendar();
-
-    // const bulan = document.getElementById('Berapa_Bulan');
-    // const targetUang = document.getElementById('Target_Uang');
-    // const perBulan = document.getElementById('Perbulan');
-
-    // function hitungPerBulan() {
-    //     const b = parseFloat(bulan.value) || 0;
-    //     const t = parseFloat(targetUang.value) || 0;
-    //     if (b > 0 && t > 0) {
-    //         perBulan.value = Math.ceil(t / b);
-    //     } else {
-    //         perBulan.value = '';
-    //     }
-    // }
-
-    // bulan.addEventListener('input', hitungPerBulan);
-    // targetUang.addEventListener('input', hitungPerBulan);
-</script>
-

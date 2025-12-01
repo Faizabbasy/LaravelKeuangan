@@ -8,7 +8,7 @@
         @endif
         <h4 class="text-center fw-bold mb-4"><i class="fa fa-line-chart text-success"></i></h4>
         <h5 class="text-center mb-3 p-2">Tambah tabungan</h5>
-        <form method="POST" action="{{ route('user.targets.store') }}">
+        <form method="POST" action="{{ route('user.targets.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="Target" class="form-label">Target</label>
@@ -31,6 +31,16 @@
                 <input type="Target_Uang" name="Target_Uang" id="Target_Uang" class="form-control"
                     @error('name') is-invalid @enderror>
                 @error('Target_Uang')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group my-2">
+                <label for="foto">Foto Target</label>
+                <input type="file" name="foto" id="foto" class="form-control"
+                    @error('foto')
+                    is-invalid
+                @enderror>
+                @error('foto')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>

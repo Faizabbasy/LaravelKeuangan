@@ -10,7 +10,7 @@ class Target extends Model
 
     use SoftDeletes;
 
-    protected $fillable = ['Target', 'Berapa_Bulan', 'Target_Uang'];
+    protected $fillable = ['Target', 'Berapa_Bulan', 'Target_Uang', 'foto'];
 
     public function Riwayats() {
         //panggil jenis relasi

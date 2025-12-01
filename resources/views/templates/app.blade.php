@@ -98,12 +98,12 @@
                     </a>
                     <ul class="dropdown-menu text-bold" aria-labelledby="navbarDropdownMenuLink">
                         <li>
-                            <a class="dropdown-item" href="{{ route('admin.nasabah.index')}}">Data Nasabah</a>
+                            <a class="dropdown-item" href="{{ route('admin.nasabah.index') }}">Data Nasabah</a>
                         </li>
                     </ul>
                 </li>
             @elseif (Auth::check() && Auth::user()->role == 'user')
-                <a href=""><i class="fa-solid fa-house"></i> Beranda</a>
+                <a href="{{ route('user.dashboard')}}"><i class="fa-solid fa-house"></i> Beranda</a>
                 <a href="{{ route('user.targets.create') }}"><i class="fa-solid fa-plus"></i> Input Target Baru</a>
                 <a href="{{ route('user.riwayats.index') }}"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat</a>
             @else
@@ -146,17 +146,17 @@
 
 
     <!-- MDB -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/9.1.0/mdb.umd.min.js"></script>
-    {{-- CDN JS datatables --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/9.1.0/mdb.umd.min.js"></script>
+
+    <!-- DataTables -->
     <script src="https://cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
-    {{-- AOS --}}
+
+    <!-- AOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
-    </script>
+
+    <!-- Bootstrap bundle (WAJIB) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
 
     {{-- dinamis yg isinya javascript --}}
     {{-- style untuk css --}}

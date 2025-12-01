@@ -14,9 +14,10 @@ class RiwayatController extends Controller
      */
     public function index()
     {
-        $riwayats = Riwayat::all();
+        $riwayats = Riwayat::with('target')->get();
         return view('user.riwayat.index', compact('riwayats'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -90,8 +91,35 @@ class RiwayatController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Riwayat $riwayat)
+    public function destroy(Riwayat $riwayat, $id)
     {
-        //
+        $deleteData = Riwayat::where('id', $id)->delete();
+        if ($deleteData) {
+            return redirect()->route('user.riwayats.index')->with('success', 'Berhasil menghapus');
+        } else {
+            return redirect()->back()->with('failed', 'Gagal! Silahkan Coba Lagi');
+        }
+    }
+
+    public function trash()
+    {
+        $riwayats = Riwayat::onlyTrashed()->get();
+        return view('user.riwayat.trash', compact('riwayats'));
+    }
+
+    public function restore($id)
+    {
+        $riwayats = Riwayat::onlyTrashed()->find($id);
+        // restore() : mengembalikan data ke belum dihapus
+        $riwayats->restore();
+        return redirect()->route('user.riwayats.index')->with('success', 'Berhasil mengembalikan data!!');
+    }
+
+    public function deletePermanent($id)
+    {
+        $riwayats = Riwayat::onlyTrashed()->find($id);
+        // forceDelete() : hapus selamanya dari database
+        $riwayats->forceDelete();
+        return redirect()->back()->with('success', 'Berhasil mengepaus data selamanya!!');
     }
 }
