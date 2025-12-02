@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Target;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\TargetExport;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+
 
 
 class TargetController extends Controller
@@ -173,5 +175,25 @@ class TargetController extends Controller
         return redirect()->back()->with('success', 'Berhasil mengepaus data selamanya!!');
     }
 
-    
+    public function dataChart()
+    {
+        $targetActive = Target::where('actived', 1)->count();
+        $targetNonActive = Target::where('actived', 0)->count();
+
+        $labels = ['Film Aktif', 'Film Non-Aktif'];
+        $data = [$targetActive, $targetNonActive];
+
+        return response()->json([
+            'labels' => $labels,
+            'data' => $data
+        ]);
+    }
+
+    // public function printPDF()
+    // {
+    //     $target = Target::get();
+    //     view()->share('Target',$target);
+    //     $pdf = PDF::loadView('user.targets.print_pdf', ['target' => $target])->setPaper('a4', 'landscape');
+    //     return $pdf->download('Data_Target_Tabungan.pdf');
+    // }
 }

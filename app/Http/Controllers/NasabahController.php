@@ -65,4 +65,32 @@ class NasabahController extends Controller
     {
         //
     }
+
+    public function chartAdmin()
+{
+    $today = \Carbon\Carbon::today();
+    $yesterday = \Carbon\Carbon::yesterday();
+
+    // hitung total nabung hari ini
+    $todayData = Riwayat::whereDate('created_at', $today)->get();
+    $todayLabels = $todayData->pluck('nama'); // atau sesuai kolom
+    $todayAmounts = $todayData->pluck('jumlah'); // atau nominal tabungan
+
+    // hitung total nabung kemarin
+    $yesterdayData = Riwayat::whereDate('created_at', $yesterday)->get();
+    $yesterdayLabels = $yesterdayData->pluck('nama');
+    $yesterdayAmounts = $yesterdayData->pluck('jumlah');
+
+    return response()->json([
+        'today' => [
+            'labels' => $todayLabels,
+            'data' => $todayAmounts
+        ],
+        'yesterday' => [
+            'labels' => $yesterdayLabels,
+            'data' => $yesterdayAmounts
+        ]
+    ]);
+}
+
 }

@@ -41,6 +41,7 @@ Route::middleware('isUser')->prefix('/user')->name('user.')->group(function() {
     Route::get('/trash', [TargetController::class, 'trash'])->name('trash');
     Route::patch('/restore/{id}', [TargetController::class, 'restore'])->name('restore');
     Route::delete('/delete-permanent/{id}', [TargetController::class, 'deletePermanent'])->name('delete_permanent');
+    Route::get('/print/pdf', [TargetController::class, 'printPDF'])->name('print_pdf');
 });
 
 
@@ -62,6 +63,7 @@ Route::middleware('isAdmin')->prefix('/admin')->name('admin.')->group(function()
     Route::get('/dashboard', function() {
         return view('admin.dashboard');
     })->name('dashboard');
+    Route::get('/chart', [NasabahController::class, 'chartAdmin'])->name('chart');
     // NASABAH
     Route::prefix('/nasabah')->name('nasabah.')->group(function() {
         Route::get('/', [NasabahController::class, 'index'])->name('index');

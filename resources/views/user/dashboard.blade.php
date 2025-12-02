@@ -78,6 +78,9 @@
                             <a href="{{ route('user.targets.trash') }}" class="btn btn-outline-secondary">
                                 <i class="fa-solid fa-trash-can me-1"></i> Data Sampah
                             </a>
+                            {{-- <a href="{{ route('user.targets.print_pdf') }}" class="btn btn-outline-secondary">
+                                <i class="fa-solid fa-trash-can me-1"></i> Cetak PDF
+                            </a> --}}
                         </div>
                     </div>
 
