@@ -98,12 +98,15 @@
                     </a>
                     <ul class="dropdown-menu text-bold" aria-labelledby="navbarDropdownMenuLink">
                         <li>
-                            <a class="dropdown-item" href="{{ route('admin.nasabah.index') }}">Data Nasabah</a>
+                            <a class="dropdown-item text-dark" href="{{ route('admin.nasabah.index') }}">Data Nasabah</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item text-dark" href="{{ route('admin.RiwayatUser.index')}}">Riwayat User</a>
                         </li>
                     </ul>
                 </li>
             @elseif (Auth::check() && Auth::user()->role == 'user')
-                <a href="{{ route('user.dashboard')}}"><i class="fa-solid fa-house"></i> Beranda</a>
+                <a href="{{ route('user.dashboard') }}"><i class="fa-solid fa-house"></i> Beranda</a>
                 <a href="{{ route('user.targets.create') }}"><i class="fa-solid fa-plus"></i> Input Target Baru</a>
                 <a href="{{ route('user.riwayats.index') }}"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat</a>
             @else
@@ -145,24 +148,18 @@
     </div>
 
 
-    <!-- MDB -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/9.1.0/mdb.umd.min.js"></script>
 
-    <!-- DataTables -->
     <script src="https://cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
 
-    <!-- AOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <!-- Bootstrap bundle (WAJIB) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    {{-- jQuery WAJIB ADA DI SINI --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    {{-- Chart.js --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
     {{-- dinamis yg isinya javascript --}}
     {{-- style untuk css --}}
     @stack('script')

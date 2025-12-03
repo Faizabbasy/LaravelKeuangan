@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Target;
+use App\Models\Riwayat;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -21,7 +22,8 @@ class TargetController extends Controller
     public function index()
     {
         $targets = Target::all();
-        return view('user.dashboard', compact('targets'));
+        $riwayats = Riwayat::all();
+        return view('user.dashboard', compact('targets', 'riwayats'));
     }
 
     /**
@@ -189,11 +191,11 @@ class TargetController extends Controller
         ]);
     }
 
-    // public function printPDF()
-    // {
-    //     $target = Target::get();
-    //     view()->share('Target',$target);
-    //     $pdf = PDF::loadView('user.targets.print_pdf', ['target' => $target])->setPaper('a4', 'landscape');
-    //     return $pdf->download('Data_Target_Tabungan.pdf');
-    // }
+    public function printPDF()
+    {
+        $targets = Target::get();
+        view()->share('targets',$targets);
+        $pdf = PDF::loadView('user.target.print_pdf', ['target' => $targets])->setPaper('a4', 'landscape');
+        return $pdf->download('Data_Target_Tabungan.pdf');
+    }
 }

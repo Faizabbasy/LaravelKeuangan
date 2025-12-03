@@ -17,6 +17,8 @@ class Target extends Model
         return $this->hasMany(Riwayat::class);
     }
 
+    
+
     public function getPerbulanAttribute($value)
     {
         return $value ?? ($this->Berapa_Bulan > 0 ? ceil($this->Target_Uang / $this->Berapa_Bulan) : 0);

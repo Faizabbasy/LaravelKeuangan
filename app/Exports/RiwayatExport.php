@@ -2,14 +2,14 @@
 
 namespace App\Exports;
 
-use App\Models\Target;
+use App\Models\Riwayat;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Carbon\Carbon;
 
 
-class TargetExport implements FromCollection, WithHeadings, WithMapping
+class RiwayatExport implements FromCollection, WithHeadings, WithMapping
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -19,22 +19,22 @@ class TargetExport implements FromCollection, WithHeadings, WithMapping
 
     public function collection()
     {
-        return Target::all();
+        return Riwayat::all();
     }
 
     public function headings(): array
     {
-        return ['No', 'Target', 'Berapa lama', 'Target Uang', 'Foto'];
+        return ['No', 'Target', 'Stor', 'Tanggal', 'Target Uang'];
     }
 
-    public function map($Target): array
+    public function map($Riwayat): array
     {
         return [
             ++$this->rowNumber,
-            $Target->target_id,
-            $Target->Berapa_Bulan,
-            $Target->Target_Uang,
-            $Target->foto,
+            $Riwayat->target,
+            $Riwayat->stor,
+            $Riwayat->Target_Uang,
+            $Riwayat->Tanggal,
         ];
     }
 }

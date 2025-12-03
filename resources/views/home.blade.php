@@ -15,7 +15,7 @@
                                 <h3 class="d-flex text-center justify-content-center mb-0">
                                     <div class="circle-icon">
                                         <i class="fa-solid fa-dollar-sign"></i>
-                                    </div> <span class="fs-4 mt-3">Rp 12.500.000</span>
+                                    </div>
                                 </h3>
                             </div>
                         </div>
@@ -57,8 +57,10 @@
             <div class="col-lg-6">
                 <div class="card bg-white shadow-sm border-0" style="height: 50vh">
                     <div class="card-header bg-white d-flex justify-content-between align-items-center border-0">
-                        <h5 class="mb-0 text-secondary fw-semibold">Daftar Target Tabungan</h5>
+                        <h5 class="mb-0 text-secondary fw-semibold">Daftar Target Tabungan<i class="fa-solid fa-clipboard text-primary"></i></h5>
                         <a href="#" class="btn btn-secondary btn-sm">Data Sampah</a>
+                        <a href="#" class="btn btn-secondary btn-sm">Export Excel</a>
+                        <a href="#" class="btn btn-secondary btn-sm">Cetak PDF</a>
                         {{-- <a href="#" class="btn btn-success">Tambah data</a> --}}
                     </div>
                     <div class="card-body p-3">

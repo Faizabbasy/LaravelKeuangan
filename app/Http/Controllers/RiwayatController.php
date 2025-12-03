@@ -6,6 +6,7 @@ use App\Models\Riwayat;
 use App\Models\Target;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\RiwayatExport;
 
 class RiwayatController extends Controller
 {
@@ -121,5 +122,11 @@ class RiwayatController extends Controller
         // forceDelete() : hapus selamanya dari database
         $riwayats->forceDelete();
         return redirect()->back()->with('success', 'Berhasil mengepaus data selamanya!!');
+    }
+
+    public function exportExcel ()
+    {
+        $file_name = "data-Riwayat.xlsx";
+        return Excel::download(new RiwayatExport, $file_name);
     }
 }

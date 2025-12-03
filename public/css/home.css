@@ -89,15 +89,15 @@ h5, h4 {
     }
 
         .circle-icon {
-      width: 60px;
-      height: 60px;
-      background-color: rgba(0, 200, 83, 0.15); /* hijau muda transparan */
+      width: 100px;
+      height: 100px;
+      background-color: rgba(0, 200, 83, 0.15);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
     }
     .circle-icon i {
-      color: #28a745; /* hijau ikon */
-      font-size: 28px;
+      color: #28a745; 
+      font-size: 32px;
     }

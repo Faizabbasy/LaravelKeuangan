@@ -17,4 +17,9 @@ class Riwayat extends Model
     public function Target() {
         return $this->belongsTo(Target::class, 'target_id');
     }
+
+    public function RiwayatUser() {
+        //panggil jenis relasi
+        return $this->hasMany(RiwayatUser::class);
+    }
 }

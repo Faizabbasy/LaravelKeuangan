@@ -2,7 +2,17 @@
 
 @section('navbar')
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-
+    <div style="margin-left: 16%">
+        @if (Session::get('success'))
+            {{-- Auth::user() : mengambil data pengguna, Auth::user()->fieldtableusers --}}
+            <div class="alert alert-success w-100">{{ Session::get('success') }}
+                <b>Selamat Datang, {{ Auth::user()->name }}</b>
+            </div>
+        @endif
+        @if (Session::get('logout'))
+            <div class="alert alert-warning">{{ Session::get('logout') }}</div>
+        @endif
+    </div>
     <div class="container-fluid px-4 mt-4">
         <div class="row g-4 align-items-start">
             <div class="col-lg-6">
@@ -15,9 +25,14 @@
                                 <h3 class="d-flex text-center justify-content-center mb-0">
                                     <div class="circle-icon">
                                         <i class="fa-solid fa-dollar-sign"></i>
-                                        {{-- @foreach ($riwayats as $key => $target)
-                                        <td>Rp {{ number_format($target->stor, 0, ',', '.') }}</td>
-                                    @endforeach --}}
+                                        @php
+                                            $total = $riwayats->sum('stor');
+                                        @endphp
+                                        <tr>
+                                            <td><strong>{{ number_format($total, 0, ',', '.') }}</strong>
+                                            </td>
+                                        </tr>
+                                    </div>
                                 </h3>
                             </div>
                         </div>
@@ -68,19 +83,20 @@
             <div class="col-lg-6">
                 <div class="card bg-white shadow-sm border-0" style="height: 80vh;">
                     <div class="card-header bg-white d-flex justify-content-between align-items-center border-0">
-                        <h5 class="mb-0 text-secondary fw-semibold">Daftar Target Tabungan</h5>
+                        <h5 class="mb-0 text-secondary fw-semibold">Daftar Target Tabungan <i
+                                class="fa-solid fa-clipboard text-primary"></i></h5>
                         {{-- <a href="{{ route('user.targets.export') }}" class="btn btn-secondary me-2">Export (.xlsx)</a>
                         <a href="{{ route('user.targets.trash') }}" class="btn btn-secondary btn-sm">Data Sampah</a> --}}
-                        <div class="d-flex w-50">
-                            <a href="{{ route('user.targets.export') }}" class="btn btn-outline-secondary me-2">
+                        <div class="d-flex w-75 ">
+                            <a href="{{ route('user.targets.export') }}" class="btn btn-outline-secondary m-1">
                                 <i class="fa-solid fa-file-export me-1"></i> Export (.xlsx)
                             </a>
-                            <a href="{{ route('user.targets.trash') }}" class="btn btn-outline-secondary">
+                            <a href="{{ route('user.targets.trash') }}" class="btn btn-outline-secondary m-1">
                                 <i class="fa-solid fa-trash-can me-1"></i> Data Sampah
                             </a>
-                            {{-- <a href="{{ route('user.targets.print_pdf') }}" class="btn btn-outline-secondary">
+                            <a href="{{ route('user.targets.print_pdf') }}" class="btn btn-outline-secondary m-1">
                                 <i class="fa-solid fa-trash-can me-1"></i> Cetak PDF
-                            </a> --}}
+                            </a>
                         </div>
                     </div>
 
@@ -268,6 +284,13 @@
         </button>
     </div>
     <!-- Carousel wrapper -->
+
+    {{-- chart js --}}
+    <div class="card bg-white shadow-sm border-0 p-3 mt-3">
+        <h5 class="text-center">Perbandingan Stor: Kemarin & Hari Ini</h5>
+        <canvas id="storPieChart" width="400" height="400"></canvas>
+    </div>
+
 
 
     @foreach ($targets as $key => $target)

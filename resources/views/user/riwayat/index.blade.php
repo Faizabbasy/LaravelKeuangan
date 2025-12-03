@@ -5,9 +5,9 @@
 
     <div class="card  p-4" style="margin-left: 18%">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="mb-0">Riwayat</h4>
+            <h4 class="mb-0">Riwayat <i class="fa-solid fa-file-waveform text-danger"></i></h4>
             <div>
-                <a href="" class="btn btn-outline-secondary me-2">
+                <a href="{{ route('user.riwayats.export')}}" class="btn btn-outline-secondary me-2">
                     <i class="fa-solid fa-file-export me-1"></i> Export (.xlsx)
                 </a>
                 <a href="{{ route('user.riwayats.trash') }}" class="btn btn-outline-secondary">
