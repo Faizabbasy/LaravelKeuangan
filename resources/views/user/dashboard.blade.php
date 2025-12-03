@@ -286,9 +286,24 @@
     <!-- Carousel wrapper -->
 
     {{-- chart js --}}
-    <div class="card bg-white shadow-sm border-0 p-3 mt-3">
-        <h5 class="text-center">Perbandingan Stor: Kemarin & Hari Ini</h5>
-        <canvas id="storPieChart" width="400" height="400"></canvas>
+    <div class="d-flex">
+        <div class="w-25 m-3 bg-warning"
+            style="background-color:aliceblue; border-radius:10px; border-style:solid; margin-left: 20% !important;">
+            <h5>Total Target</h5>
+            <p class="text-4x1 font-extrabold text-primary">{{ $data['jmlTarget'] }}</p>
+            {{-- <canvas id="chartBar"></canvas> --}}
+        </div>
+        <div class="w-25 m-3 bg-danger"
+            style="background-color:aliceblue; border-radius:10px; border-style:solid; margin-left: 3% !important;">
+            <h5>Total Stor</h5>
+            <p class="text-4x1 font-extrabold text-primary">{{ $data['jmlStor'] }}</p>
+            {{-- <canvas id="chartBar"></canvas> --}}
+        </div>
+    </div>
+
+    <div class=" mx-auto m-5" style="margin-left: 210px !important;">
+        <h2 class="text-center font-bold text-gray-800 mb-4">Jumlah Target</h2>
+        <canvas id="grafikTarget" width="400" height="100"></canvas>
     </div>
 
 
@@ -347,5 +362,27 @@
         };
 
         renderCalendar();
+    </script>
+    <script>
+        const ctx = document.getElementById('grafikTarget');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($namaTarget) !!},
+                datasets: [{
+                    label: 'Jumlah Uang terkumpul',
+                    data: {!! json_encode($jumlahStor) !!},
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
     </script>
 @endsection

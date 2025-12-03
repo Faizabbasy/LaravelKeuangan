@@ -2,7 +2,7 @@
 
 @section('navbar')
     <h2 class="text-center mt-5">Selamat datang di halaman admin😊✌️</h2>
-    <div class="row gap-2" style="margin-left: 25%">
+    {{-- <div class="row gap-2" style="margin-left: 25%">
         <div class="col-6" style="background-color:aliceblue; border-radius:10px; border-style:solid; margin-top:5%">
             <h5>Data Nabung Hari ini {{ now()->format('F') }}</h5>
             <canvas id="chartBar"></canvas>
@@ -12,10 +12,10 @@
             <h5>Data Nabung Kemarin</h5>
             <canvas id="chartPie" class="w-65 h-75 px-5 ps-4"></canvas>
         </div>
-    </div>
+    </div> --}}
 @endsection
 
-@push('script')
+{{-- @push('script')
     <script>
         let labelBar = [];
         let dataBar = [];
@@ -44,4 +44,4 @@
             });
         });
     </script>
-@endpush
+@endpush --}}

@@ -10,14 +10,14 @@ class Target extends Model
 
     use SoftDeletes;
 
-    protected $fillable = ['Target', 'Berapa_Bulan', 'Target_Uang', 'foto'];
+    protected $fillable = ['Target', 'Berapa_Bulan', 'Target_Uang', 'foto', 'riwayat_id'];
 
     public function Riwayats() {
         //panggil jenis relasi
         return $this->hasMany(Riwayat::class);
     }
 
-    
+
 
     public function getPerbulanAttribute($value)
     {

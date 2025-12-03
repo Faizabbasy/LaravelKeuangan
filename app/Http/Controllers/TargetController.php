@@ -23,7 +23,18 @@ class TargetController extends Controller
     {
         $targets = Target::all();
         $riwayats = Riwayat::all();
-        return view('user.dashboard', compact('targets', 'riwayats'));
+
+        $data = [
+            'jmlTarget' => Target::count(),
+            'jmlStor' => Riwayat::count()
+        ];
+
+        $target = Target::all();
+        $namaTarget = $target->pluck('Target')->toArray();
+        $jumlahStor = Riwayat::pluck('stor')->toArray();
+// dd($jumlahStor);
+
+        return view('user.dashboard', compact('targets', 'riwayats', 'data', 'namaTarget', 'jumlahStor'));
     }
 
     /**
@@ -177,19 +188,19 @@ class TargetController extends Controller
         return redirect()->back()->with('success', 'Berhasil mengepaus data selamanya!!');
     }
 
-    public function dataChart()
-    {
-        $targetActive = Target::where('actived', 1)->count();
-        $targetNonActive = Target::where('actived', 0)->count();
+        public function dataChart()
+        {
+            $data_today = Target::where('actived', 1)->count();
+            $data_yesterday = Target::where('actived', 0)->count();
 
-        $labels = ['Film Aktif', 'Film Non-Aktif'];
-        $data = [$targetActive, $targetNonActive];
+            $labels = ['Stor Hari Ini', 'Stor Kemarin'];
+            $data = [$data_today, $data_yesterday];
 
-        return response()->json([
-            'labels' => $labels,
-            'data' => $data
-        ]);
-    }
+            return response()->json([
+                'labels' => $labels,
+                'data' => $data
+            ]);
+        }
 
     public function printPDF()
     {

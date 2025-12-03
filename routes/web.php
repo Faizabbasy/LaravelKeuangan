@@ -32,6 +32,7 @@ Route::middleware('isUser')->prefix('/user')->name('user.')->group(function() {
     Route::get('/dashboard', [TargetController::class, 'index'])->name('dashboard');
 
     Route::prefix('/targets')->name('targets.')->group(function() {
+    Route::get('/chart-tabungan', [TargetController::class, 'index']);
     Route::get('/create', [TargetController::class, 'create'])->name('create');
     Route::post('/store', [TargetController::class, 'store'])->name('store');
     Route::get('/edit/{id}', [TargetController::class, 'edit'])->name('edit');
